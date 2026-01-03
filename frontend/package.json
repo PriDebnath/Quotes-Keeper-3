@@ -1,17 +1,22 @@
 {
-  "name": "frontend",
+  "name": "quotes-keeper-3",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "install:packages": "pnpm install",
+    "install:packages:lockfile": "pnpm install --frozen-lockfile",
+    "start": "vite",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
