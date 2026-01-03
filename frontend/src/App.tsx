@@ -1,34 +1,77 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from 'react'
+import { PlusIcon } from 'lucide-react'
+import { Button } from './components/ui/button'
+import type { Quote } from './model/quote.model'
+import { ListQuote } from './feature/quote/list.quote'
+import AddEditQuoteDialog from '@/feature/quote/dialog/add-edit.quote.dialog'
+
+let quotesMock = [
+  {
+    id: 1,
+    text: "Q 1"
+  },
+  {
+    id: 2,
+    text: "Q 2"
+  }
+]
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [openDialog, setOpenDialog] = useState(false)
+  const [addOrEdit, setAddOrEdit] = useState<"add" | "edit">("add")
+  const [selectedQuote, setSelectedQuote] = useState<Quote | null>(null)
+  const [quotes, setQuotes] = useState<Quote[]>(quotesMock)
+
+  const openAddDialog = () => {
+    setSelectedQuote(null)
+    setAddOrEdit("add")
+    setOpenDialog(true)
+  }
+
+  const addQuote = (quote: Quote) => {
+    setQuotes([...quotes, quote])
+  }
+
+
+  const openEditDialog = (quote: Quote) => {
+    setSelectedQuote(quote)
+    setAddOrEdit("edit")
+    setOpenDialog(true)
+  }
+
+  const handleSubmit = (quote: Quote) => {
+    console.log(quote)
+    let editedQuote = quotes.find((quote) => quote.id == quote.id)
+    let editedQuoteIndex = quotes.indexOf(editedQuote!)
+    quotes[editedQuoteIndex] = quote
+    let newQuotes = quotes
+    setQuotes(newQuotes)
+    setOpenDialog(false)
+  }
+
+  const openEditDeleteDialog = (quote: Quote) => {
+
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <main>
+      <div className="flex gap-4">
+        <h3>List Quote</h3>
+        <Button onClick={openAddDialog} > <PlusIcon /> Add Quote </Button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <ListQuote quotes={quotes} onEdit={openEditDialog} onDelete={openEditDeleteDialog} />
+
+      <AddEditQuoteDialog
+        mode={addOrEdit}
+        quote={selectedQuote}
+        open={openDialog}
+        setOpen={setOpenDialog}
+        handleSubmit={handleSubmit}
+      />
+    </main>
   )
 }
 
