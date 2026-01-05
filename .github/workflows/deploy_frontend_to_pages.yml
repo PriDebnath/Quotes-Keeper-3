@@ -26,12 +26,14 @@ jobs:
    
       - name: Install Dependencies
         run: |
-          npm install --legacy-peer
+          cd frontend
+          npm run install:packages
    
       - name: Build Frontend App
         env:
           DEPLOYMENT_TIMESTAMP: ${{ github.event.head_commit.timestamp || github.run_started_at }}
         run: |
+          cd frontend
           npm run build      
  
       - name: Setup Pages
@@ -41,7 +43,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'dist' # set the path according to your project
+          path: 'frontend/dist' # set the path according to your project
     
       - name: Deploy to GitHub Pages
         id: deployment
