@@ -1,3 +1,5 @@
+import "dotenv/config"
+import "@/env" // load environment variables and match with zod schema defined in env.ts
 import { Elysia } from "elysia";
 import { openapi } from '@elysiajs/openapi'
 import { quote } from "@/src/module/quote/controller";
