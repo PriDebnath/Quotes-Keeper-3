@@ -1,6 +1,6 @@
 import { Elysia, t } from 'elysia'
 import { quoteService } from '@/src/module/quote/service'
-import { createQuoteSchema, getQuoteSchema, updateQuoteSchema } from '@/src/module/quote/type'
+import { createQuoteSchema, queryQuoteSchema, updateQuoteSchema } from '@/src/module/quote/type'
 
 export const quote = new Elysia({ prefix: '/quote' })
     .get(
@@ -9,7 +9,7 @@ export const quote = new Elysia({ prefix: '/quote' })
             const response = await quoteService.getQuote(params.id)
             return response
         }, {
-        params: getQuoteSchema,
+        params: queryQuoteSchema,
         detail: {
             summary: 'Get a quote by id',
             description: 'Get a quote by id',
@@ -23,11 +23,24 @@ export const quote = new Elysia({ prefix: '/quote' })
             const response = await quoteService.updateQuote(params.id, body.text)
             return response
         }, {
-        params: getQuoteSchema,
+        params: queryQuoteSchema,
         body: updateQuoteSchema,
         detail: {
             summary: 'Update a quote by id',
             description: 'Update a quote by id',
+            tags: ['quote'],
+        }
+    })
+    .delete(
+        '/:id',
+        async ({ params, cookie: { session } }) => {
+            const response = await quoteService.deleteQuote(params.id)
+            return response
+        }, {
+        params: queryQuoteSchema,
+        detail: {
+            summary: 'Delete a quote by id',
+            description: 'Delete a quote by id',
             tags: ['quote'],
         }
     })

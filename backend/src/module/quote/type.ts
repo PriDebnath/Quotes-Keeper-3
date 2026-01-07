@@ -4,7 +4,7 @@ export const createQuoteSchema = t.Object({
     text: t.String(),
 })
 
-export const getQuoteSchema = t.Object({
+export const queryQuoteSchema = t.Object({
     id: t.Number(),
 })
 
