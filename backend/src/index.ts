@@ -3,12 +3,31 @@ import "@/src/utils/env" // load environment variables and match with zod schema
 import { Elysia } from "elysia";
 import { sql } from "drizzle-orm";
 import { db } from "@/src/database";
-import { openapi } from '@elysiajs/openapi'
+import { openapi } from "@elysiajs/openapi";
 import { quote } from "@/src/module/quote/controller";
 import { logger } from "@/src/utils/logger";
 
 const app = new Elysia()
   .use(openapi())
+  // Basic per-request logging
+  .onRequest(({ request }) => {
+    logger.info(
+      {
+        method: request.method,
+        url: request.url,
+      },
+      "Incoming request",
+    );
+  })
+  .onError(({ error }) => {
+    logger.error(error, "Error");
+  })
+  .onAfterResponse((response) => {
+    logger.info({
+      // response,
+      status: response.set.status,
+    }, "After response");
+  })
   .get("/", () => "Hello Elysia")
   .group("/health", (app) => {
     return app
