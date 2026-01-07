@@ -1,18 +1,15 @@
 import "dotenv/config"
-import "@/env" // load environment variables and match with zod schema defined in env.ts
+import "@/src/utils/env" // load environment variables and match with zod schema defined in env.ts
 import { Elysia } from "elysia";
 import { sql } from "drizzle-orm";
 import { db } from "@/src/database";
 import { openapi } from '@elysiajs/openapi'
 import { quote } from "@/src/module/quote/controller";
-import { logger } from "@bogeychan/elysia-logger";
+import { logger } from "@/src/utils/logger";
 
 const app = new Elysia()
   .use(openapi())
   .get("/", () => "Hello Elysia")
-  .use(logger({
-    level: "error"
-  }))
   .group("/health", (app) => {
     return app
       .get("/", () => {
@@ -43,6 +40,6 @@ const app = new Elysia()
   .use(quote)
   .listen(3000);
 
-console.log(
+logger.info(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
 );
