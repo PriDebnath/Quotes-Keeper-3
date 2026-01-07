@@ -1,21 +1,19 @@
-// import type { Quote } from '@/model/quote.model'
+import { db } from '@/src/database'
+import { table } from '@/src/database/schema/quote/quote.schema'
+import type { NewQuote, Quote } from '@/src/database/model/quote/quote.model'
 
 class QuoteService {    
-    async getQuotes(): Promise<any[]> {
-        return [
-            {
-                id: 1,
-                text: 'The only way to do great work is to love what you do.'
-            },
-            {
-                id: 2,
-                text: 'The best way to predict the future is to invent it.'
-            },
-            {
-                id: 3,
-                text: 'The only way to do great work is to love what you do.'
-            }
-        ]
+    async getQuotes(): Promise<Quote[]> {
+        const quotes = await db.select().from(table.quotes)
+        return quotes
+    }
+    async createQuote(quote: NewQuote): Promise<Quote> {
+        const newQuote = await db.insert(table.quotes).values({
+            text: quote.text,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }).returning()
+        return newQuote[0]
     }
 }
 
