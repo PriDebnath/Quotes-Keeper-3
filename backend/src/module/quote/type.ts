@@ -7,3 +7,7 @@ export const createQuoteSchema = t.Object({
 export const getQuoteSchema = t.Object({
     id: t.Number(),
 })
+
+export const updateQuoteSchema = t.Object({
+    text: t.String(),
+})

@@ -24,6 +24,20 @@ class QuoteService {
         }).returning()
         return newQuote[0]
     }
+    async updateQuote(id: number, text: string): Promise<Quote> {
+        const updatedQuote = await db.update(table.quotes).set({
+            text: text,
+            updatedAt: new Date(),
+        }).where(eq(table.quotes.id, id)).returning()
+        return updatedQuote[0]
+    }
+    async deleteQuote(id: number): Promise<Quote> {
+        const deletedQuote = await db.update(table.quotes).set({
+            deletedAt: new Date(),
+            isDeleted: true,
+        }).where(eq(table.quotes.id, id)).returning()
+        return deletedQuote[0]
+    }
 }
 
 export const quoteService = new QuoteService()
