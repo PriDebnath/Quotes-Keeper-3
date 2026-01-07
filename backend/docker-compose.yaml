@@ -5,7 +5,8 @@ services:
     container_name: quotes-keeper-postgres
     restart: unless-stopped
     environment: 
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: quotes-keeper
     ports: 
       - "5432:5432"

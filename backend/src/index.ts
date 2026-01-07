@@ -43,10 +43,11 @@ const app = new Elysia()
         }
       })
       .get("/db", async () => {
-        await db.execute(sql`select 1`)
-        console.log("✅ Database connected successfully")
+        const res = await db.execute(sql`select 1`)
+        logger.info("✅ Database connected successfully")
         return {
-          status: "ok"
+          status: "ok",
+          res
         }
       }, {
         detail: {
