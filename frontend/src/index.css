@@ -66,6 +66,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #ffffff;
+  background-color:  #F3E8FF;
+  background-color:  rgba(243, 232 ,255, 1);
 }
 
 h1 {

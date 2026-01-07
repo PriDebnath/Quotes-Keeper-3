@@ -24,25 +24,18 @@ const QuoteCard = (props: Props) => {
 
     return (<div className={
         cn(
-            "bg-white rounded-xl p-5 flex justify-between items-start gap-4",
-            "shadow-[0_2px_8px_rgba(0,0,0,0.08)]",
-            "hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)]",
+            "bg-white rounded-xl p-5 flex flex-col justify-between items-start gap-4",
+            "shadow-[0_2px_12px_rgba(0,0,0,0.1)]",
+            "hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)]",
             "transition-shadow duration-200"
         )
     }>
+    
+        <p className="text-xl font-bold text-purple-700">"{quote.text}"</p>
+        <p className="text-base w-full text-right">-- Pritam</p>
+                
+        <div className="flex w-full items-end justify-between">
         <div className="">
-            <p className="">{quote.text}</p>
-            {/* {(q.author || q.book) && (
-                <p className="quote-attribution">
-                  {q.author && q.book 
-                    ? `- ${q.author}, ${q.book}`
-                    : q.author 
-                    ? `- ${q.author}`
-                    : q.book
-                    ? `- ${q.book}`
-                    : ''}
-                </p>
-              )} */}
             {/* {q.tags && q.tags.length > 0 && (
                 <div className="quote-tags">
                   {q.tags.map((tag, index) => (
@@ -52,8 +45,15 @@ const QuoteCard = (props: Props) => {
                   ))}
                 </div>
               )} */}
+              <span  className="text-purple-400">  #tag</span>
+              <span  className="text-purple-400">  #tag</span>
+              <span  className="text-purple-400">  #tag</span>
+              <span  className="text-purple-400">  #tag</span>
+              <span  className="text-purple-400">  #tag</span>
+              <span  className="text-purple-400">  #tag</span>
+              <span  className="text-purple-400">  #tag</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 ">
             <Button
                 className="!bg-transparent border !border-gray-300"
                 variant={"ghost"}
@@ -79,6 +79,7 @@ const QuoteCard = (props: Props) => {
             >
                 {<Trash />}
             </Button>
+        </div>
         </div>
     </div>
     )
