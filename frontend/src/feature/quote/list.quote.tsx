@@ -29,6 +29,9 @@ export function ListQuote(props: Props) {
           </div>
         )
       })}
+      <p className="text-center p-4 text-gray-400"> 
+      ---   end of quotes  ---
+      </p>
     </div>
   )
 }
