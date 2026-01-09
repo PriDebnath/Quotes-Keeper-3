@@ -1,13 +1,12 @@
-import './App.css'
 import { useEffect, useState } from 'react'
-import { PlusIcon, Home, BookOpen, Search, Settings, SearchIcon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import type { Quote } from '@/model/quote.model'
 import { ListQuote } from '@/feature/quote/list.quote'
+import DeleteQuoteDialog from '@/feature/quote/dialog/delete.quote.dialog'
 import AddEditQuoteDialog from '@/feature/quote/dialog/add-edit.quote.dialog'
 import { getAllQuotes, addQuote, updateQuote, deleteQuote } from '@/db/quote.db'
-import DeleteQuoteDialog from '@/feature/quote/dialog/delete.quote.dialog'
+import { PlusIcon, Home, BookOpen, Search, Settings, SearchIcon } from 'lucide-react'
 import { InputGroup, InputGroupInput, InputGroupAddon } from '@/components/ui/input-group'
-import { Button } from '@/components/ui/button'
 
 function App() {
   const [loading, setLoading] = useState(false)
