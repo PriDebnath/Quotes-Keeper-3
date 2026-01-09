@@ -112,9 +112,9 @@ className="rounded-b-2xl  sticky top-0 bg-purple-600 p-4">
           <span>Books</span>
         </button> */}
         <Button 
-          className="shadow-[0_0px_12px_rgba(1,255,1,0.4)] fixed bottom-4 !border-gray-500 border-lg !bg-white"
+          className="shadow-[0_0px_12px_rgba(1,255,1,0.4)] fixed bottom-4 !border-gray-500 border-lg "
           onClick={openAddDialog}>
-          <PlusIcon className='!text-green-500' />
+          <PlusIcon className='' />
         </Button>
         {/* <button className="nav-item">
           <Search size={24} />
