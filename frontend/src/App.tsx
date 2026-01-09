@@ -1,4 +1,3 @@
-import './App.css'
 import { useEffect, useState } from 'react'
 import { PlusIcon, Home, BookOpen, Search, Settings, SearchIcon } from 'lucide-react'
 import type { Quote } from '@/model/quote.model'

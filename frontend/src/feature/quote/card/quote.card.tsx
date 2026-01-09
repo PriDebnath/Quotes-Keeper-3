@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import type { Quote } from "@/model/quote.model";
-import { Check, Copy, PenIcon, Trash } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import type { Quote } from "@/model/quote.model";
+import { sanitizeHTML } from "@/helper/sanitize-html";
+import { Check, Copy, PenIcon, Trash } from "lucide-react";
 
 interface Props {
     quote: Quote;
@@ -31,9 +32,9 @@ const QuoteCard = (props: Props) => {
         )
     }>
 
-        <p className="text-xl font-bold text-purple-700">
-            <div dangerouslySetInnerHTML={{ __html: quote.text }}></div>
-        </p>
+        <div className="text-xl font-bold text-purple-700">
+            <div dangerouslySetInnerHTML={{ __html: sanitizeHTML(quote.text) }}></div>
+        </div>
         <p className="text-base w-full text-right">-- Pritam</p>
 
         <div className="flex w-full items-end justify-between">
