@@ -11,12 +11,13 @@ import { Button } from "@/components/ui/button"
 import type { Quote } from "@/model/quote.model"
 import { Textarea } from "@/components/ui/textarea"
 import { useState, useEffect, type Dispatch, type SetStateAction } from "react"
+import Tiptap from "@/components/common/tiptap-customized"
 
 interface Props {
   open: boolean;
   mode: "add" | "edit";
   quote: Quote | null;
-  handleSubmit: (quote: Quote)=> void;
+  handleSubmit: (quote: Quote) => void;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -42,6 +43,11 @@ export default function AddEditQuoteDialog(props: Props) {
     }
   }
 
+
+  const onValueUpdate = (text: string) => {
+    setQuoteData({ text: text })
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <form onSubmit={handleFormSubmit}>
@@ -65,7 +71,7 @@ export default function AddEditQuoteDialog(props: Props) {
           <div className="grid gap-4">
             <div className="grid gap-3">
               <Label htmlFor="name-1">Quote</Label>
-              <Textarea 
+              {/* <Textarea 
                 id="name-1" 
                 name="name" 
                 value={quoteData?.text || ""}
@@ -77,7 +83,8 @@ export default function AddEditQuoteDialog(props: Props) {
                     text: textValue
                   })
                 }} 
-              />
+              /> */}
+              <Tiptap value={quote?.text} onValueUpdate={onValueUpdate} />
             </div>
           </div>
           <DialogFooter>
