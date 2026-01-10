@@ -32,7 +32,7 @@ const QuoteCard = (props: Props) => {
         )
     }>
 
-        <div className="text-xl font-bold text-purple-700">
+      <div className="tiptap">   {/* IMPORTANT */}
             <div dangerouslySetInnerHTML={{ __html: sanitizeHTML(quote.text) }}></div>
         </div>
         <p className="text-base w-full text-right">-- Pritam</p>

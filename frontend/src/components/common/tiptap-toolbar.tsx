@@ -1,6 +1,6 @@
 import { Toolbar, ToolbarGroup, ToolbarSeparator } from '@/components/tiptap-ui-primitive/toolbar'
 import { Button } from '@/components/tiptap-ui-primitive/button'
-import { BoldIcon, ItalicIcon } from 'lucide-react'
+import { BoldIcon, ItalicIcon, Code, CodeIcon } from 'lucide-react'
 import type { Editor } from '@tiptap/react'
 import { useEditorState } from '@tiptap/react'
 
@@ -19,6 +19,7 @@ export default function TiptapToolbar(props: Props) {
             isItalic: editor.isActive('italic'),
             canBold: editor.can().chain().focus().toggleBold().run(),
             canItalic: editor.can().chain().focus().toggleItalic().run(),
+            canCode: editor.can().chain().focus().toggleCode().run(), //
         }),
     })
 
@@ -44,7 +45,14 @@ export default function TiptapToolbar(props: Props) {
                     <ItalicIcon className="tiptap-button-icon" />
                 </Button>
 
-
+                <Button
+                    data-style="ghost"
+                    data-active-state={editorState.canCode ? 'on' : 'off'}
+                    disabled={!editorState.canCode}
+                    onClick={() => editor.chain().focus().toggleCode().run()}
+                >
+                    <CodeIcon className="tiptap-button-icon" />
+                </Button>
 
             </ToolbarGroup>
 
